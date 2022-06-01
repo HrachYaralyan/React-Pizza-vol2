@@ -1,60 +1,26 @@
-import React from "react";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import './scss/app.scss';
-import Categories from './components/Categories';
 import Header from './components/Header';
-import PizzaBlock from './components/PizzaBlock';
-import Sort from './components/Sort';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
+
 
 // import pizzas from "./assets/pizzas.json"
 
-
-
-
-
 function App() {
-
-  let [items ,setItems] = React.useState([]);
-
-  React.useEffect(()=>{
-    fetch('https://629616eb75c34f1f3b28e361.mockapi.io/items')
-    .then((response) => {
-      return response.json();
-    })
-    .then((json) => {
-      setItems(json);
-    });
-  },[])
- 
-
-  console.log(items);
-
   return (
     <div className="wrapper">
-      <Header/>
+      <Header />
       <div className="content">
         <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-         
-            {
-              items.map((obj , index)=>(
-                <PizzaBlock key={`${obj}_${index}`}
-                            // title={obj.title}
-                            // price={obj.price}
-                            // imageUrl={obj.imageUrl}
-                            // sizes={obj.sizes}
-                            // types={obj.types}
-                            {...obj}
-                            />
-              ))
-            }
-           
-          </div>
+            <Routes>
+              <Route path='/' element={<Home /> } />
+              <Route path='/Cart' element={<Cart /> } />
+              <Route path='*' element={<NotFound/> } />
+            </Routes>
         </div>
       </div>
     </div>

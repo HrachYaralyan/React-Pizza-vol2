@@ -5,10 +5,37 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
+ 
+
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+
+    .buttonLeftPart{
+     
+      margin-left: 10px;
+    }
+    @media (max-width : 706px){
+      flex-direction: column;
+
+      .header__cart{
+        width: 100%;
+  
+      }
+      .button--cart{
+        display: flex;
+        justify-content: space-between;
+
+      }
+      .buttonLeftPart{
+        border: 1px solid white;
+        padding: 5px;
+        border-radius: 10px;
+        margin-left: 10px;
+      }
+    }
   }
 
   &__logo {
@@ -29,5 +56,10 @@
     p {
       color: #7b7b7b;
     }
+  }
+
+  .buttonLeftPart{
+    display: flex;
+
   }
 }
