@@ -3,21 +3,21 @@ import React from "react";
 let categoriesArr = ["Все","Мясные","Вегетарианская","Гриль","Острые","Закрытые"]
 
 
-function Categories() {
-  let [activeItndex ,setActiveItndex] = React.useState(0)
+function Categories({value , onChangeCategory}) {
 
-  
+
+
 
   return(
     <div className="categories">
     <ul>
       {
-        categoriesArr.map((item, index)=>{
+        categoriesArr.map((categoryName, index)=>{
           return(
-            <li onClick={()=> setActiveItndex(index)}
-                className={index == activeItndex ? "active" : ""}
-                key={`${item}_${index}`}
-                >{item}</li>
+            <li onClick={()=> onChangeCategory(index)}
+                className={index == value ? "active" : ""}
+                key={`${categoryName}_${index}`}
+                >{categoryName}</li>
           )
         })
       }
