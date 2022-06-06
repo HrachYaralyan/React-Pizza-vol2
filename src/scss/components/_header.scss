@@ -14,10 +14,16 @@
 
 
     .buttonLeftPart{
-     
+      display: flex;
+      border: 1px solid white;
+      padding: 5px;
+      border-radius: 10px;
       margin-left: 10px;
+      
     }
-    @media (max-width : 706px){
+
+   
+    @media (max-width : 1200px){
       flex-direction: column;
 
       .header__cart{
@@ -29,12 +35,12 @@
         justify-content: space-between;
 
       }
-      .buttonLeftPart{
-        border: 1px solid white;
-        padding: 5px;
-        border-radius: 10px;
-        margin-left: 10px;
+      .RigthPart{
+      
+      
+        border: 1px solid rgb(47, 0, 255);
       }
+      
     }
   }
 
@@ -58,8 +64,5 @@
     }
   }
 
-  .buttonLeftPart{
-    display: flex;
-
-  }
+  
 }

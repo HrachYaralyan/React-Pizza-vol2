@@ -8,21 +8,29 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 
 
-// import pizzas from "./assets/pizzas.json"
+export const SearchContext = React.createContext()
 
 function App() {
+
+
+  let [searchValue , setSearchValue] = React.useState("");
+ 
+
+  console.log(searchValue, " youuu");
   return (
     <div className="wrapper">
-      <Header />
+    <SearchContext.Provider value={{searchValue, setSearchValue}}>
+    <Header   />
       <div className="content">
         <div className="container">
             <Routes>
-              <Route path='/' element={<Home /> } />
+              <Route path='/' element={<Home  /> } />
               <Route path='/Cart' element={<Cart /> } />
               <Route path='*' element={<NotFound/> } />
             </Routes>
         </div>
       </div>
+    </SearchContext.Provider>
     </div>
   );
 }
