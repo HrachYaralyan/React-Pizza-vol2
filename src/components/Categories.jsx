@@ -1,6 +1,6 @@
 import React from "react";
 
-let categoriesArr = ["Все","Мясные","Вегетарианская","Гриль","Острые","Закрытые"]
+let categoriesArr = ["Все","Мясные","Вегетарианская","Гриль","Острые","Закрытые"];
 
 
 function Categories({value , onChangeCategory}) {

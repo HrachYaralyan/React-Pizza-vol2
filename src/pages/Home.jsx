@@ -1,28 +1,50 @@
 import React from 'react';
+import { useSelector ,useDispatch } from 'react-redux';
+import {setCategoryID } from "../redux/slices/filterSlice"
 
+import { SearchContext } from '../App';
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
 import Sort from '../components/Sort';
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagenation from '../components/Pagenation';
-import { SearchContext } from '../App';
+
+
 
 
   const Home = () => {
+    const dispatch = useDispatch();
+
+    // let sortType = useSelector((state)=> state.filter.sort.sortProperty);
+    // let categoryID = useSelector((state)=>{
+    //   return state.filter.categoryID
+    // })
+
+    // ALTERNATIVE AND SHORT, but also you must change "sort.sortProperty" in fetch part
+    let {categoryID , sort} = useSelector((state)=> state.filter);
+ 
+
+
+    const onChangeCategory = (i)=>{
+      dispatch(setCategoryID(i))
+    }
+
+
   let [items ,setItems] = React.useState([]);
   let [isLoading ,setIsLoading] = React.useState(true);
-  let [categoryID , setCategoryID] = React.useState(0);
-  let [sortType , setSortType] = React.useState({name : "популярности" , sortProperty : "rating"});
+  // let [categoryID , setCategoryID] = React.useState(0);
+  // let [sortType , setSortType] = React.useState({name : "популярности" , sortProperty : "rating"});
   let [currentPage ,setCurentPage] = React.useState(1);
-
   let {searchValue} = React.useContext(SearchContext)
 
+
+  
   React.useEffect(()=>{
     setIsLoading(true);
-
+    
     let category = categoryID > 0 ? `category=${categoryID}` : "";
-    let order = sortType.sortProperty.includes("-") ? "asc" : "desc";
-    let sortBy = sortType.sortProperty.replace("-","");
+    let order = sort.sortProperty.includes("-") ? "asc" : "desc";
+    let sortBy = sort.sortProperty.replace("-","");
     let search = searchValue  ? `&search=${searchValue}` : "";
 
   
@@ -35,7 +57,7 @@ import { SearchContext } from '../App';
       setIsLoading(false);
     });
     window.scrollTo(0 ,0 )
-  },[categoryID ,sortType ,searchValue ,currentPage])
+  },[categoryID ,sort ,searchValue ,currentPage])
 
   const skeleton =  [...new Array(6)].map((_, index )=> <Skeleton key={index} />) 
   const pizzas = items.map((obj , index)=>(<PizzaBlock key={`${obj}_${index}`} {...obj} />))
@@ -53,8 +75,10 @@ import { SearchContext } from '../App';
   return (
       <>
         <div className="content__top">
-            <Categories value={categoryID} onChangeCategory={(index)=> setCategoryID(index)}/>
-            <Sort value={sortType} onChangeSort={(index)=> setSortType(index)} />
+            <Categories value={categoryID} onChangeCategory={onChangeCategory}/>
+            {/* <Sort value={sortType} onChangeSort={(index)=> setSortType(index)} /> */}
+            <Sort  />
+
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
