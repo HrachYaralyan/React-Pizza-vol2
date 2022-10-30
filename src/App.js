@@ -6,37 +6,41 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
+import FullPiazza from './pages/FullPiazza';
+import MainLayout from './Layout/MainLayout';
 
 
 
-export const SearchContext = React.createContext()
+// export const SearchContext = React.createContext()
 
 function App() {
  
 
-  let [searchValue , setSearchValue] = React.useState("");
+  // let [searchValue , setSearchValue] = React.useState("");
   
 
 
 
 
   return (
-    <div className="wrapper">
+    // <div className="wrapper">
  
  
-    <SearchContext.Provider value={{searchValue, setSearchValue}}>
-    <Header   />
-      <div className="content">
-        <div className="container">
+    // <Header   />
+    //   <div className="content">
+    //     <div className="container">
+
             <Routes>
-              <Route path='/' element={<Home  /> } />
-              <Route path='/Cart' element={<Cart /> } />
+              <Route path="/" element={<MainLayout />}>
+              <Route path='' element={<Home  /> } />
+              <Route path='Cart' element={<Cart /> } />
+              <Route path='pizza/:id' element={<FullPiazza/>} />
               <Route path='*' element={<NotFound/> } />
+              </Route>
             </Routes>
-        </div>
-      </div>
-    </SearchContext.Provider>
-    </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
