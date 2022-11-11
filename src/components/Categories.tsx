@@ -3,10 +3,12 @@ import React from "react";
 let categoriesArr = ["Все","Мясные","Вегетарианская","Гриль","Острые","Закрытые"];
 
 
-function Categories({value , onChangeCategory}) {
+type ICategories= {
+  value:number;
+  onChangeCategory : (index:number)=>void ;
+}
 
-
-
+const Categories : React.FC<ICategories> =({value , onChangeCategory})=>{
 
   return(
     <div className="categories">

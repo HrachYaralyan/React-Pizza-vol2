@@ -5,11 +5,13 @@ import {useSelector , useDispatch} from "react-redux"
 import { clearItems, selectCart } from '../redux/slices/cartSlice';
 import { CartEmpty } from '../components/CartEmpty';
 
-export default function Cart() {
+
+
+const Cart :React.FC = ()=>{
  const dispatch = useDispatch();
  const {items, totalPrice} = useSelector(selectCart);
 
- const totalCount = items.reduce((sum , item)=>sum +  item.count ,0);
+ const totalCount = items.reduce((sum:number , item :any)=>sum +  item.count ,0);
 
 
  const onClickClearItems= ()=>{
@@ -43,12 +45,12 @@ export default function Cart() {
 <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
-                <span >Очистить корзину</span>
+                {/* <span >Очистить корзину</span> */}
               </div>
             </div>
             <div className="content__items">
               {items&&
-                items.map((item)=>{
+                items.map((item: any)=>{
                   return(
                     <CartItem key={item.id} {...item} />
                   )
@@ -76,3 +78,6 @@ export default function Cart() {
           </div></>
   )
 }
+
+
+export default  Cart;

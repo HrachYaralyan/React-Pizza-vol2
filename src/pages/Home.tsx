@@ -14,7 +14,7 @@ import Pagenation from '../components/Pagenation';
 import { list } from '../components/Sort';
 import {  fetchPizzas, selectPizzaData} from '../redux/slices/pizzaSlice';
 
-const Home = () => {
+const Home:React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
@@ -25,11 +25,11 @@ const Home = () => {
   let { categoryID, sort, currentPage , searchValue } = useSelector(selectFilter);
 
 
-  const onChangeCategory = (i) => {
-    dispatch(setCategoryID(i));
+  const onChangeCategory = (index:number) => {
+    dispatch(setCategoryID(index));
   };
-  const onCahnegePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onCahnegePage = (page:number) => {
+    dispatch(setCurrentPage(page));
   };
 
   // let [items, setItems] = React.useState([]);
@@ -88,7 +88,9 @@ const Home = () => {
     // try {
       // const {data } = await axios.get(`https://629616eb75c34f1f3b28e361.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`);
       // dispatch(setItems(data))
-     dispatch(fetchPizzas({
+     dispatch(
+      // @ts-ignore
+      fetchPizzas({
       category,
       order,
       sortBy,
@@ -121,7 +123,7 @@ const Home = () => {
 console.log(items,"before rendering home");
 
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
-  const pizzas = items.map((obj, index) => <Link to={`pizza/${obj.id}`} key={`${obj}_${index}`}> <PizzaBlock  {...obj} /> </Link> );
+  const pizzas = items.map((obj :any, index:number) => <Link to={`pizza/${obj.id}`} key={`${obj}_${index}`}> <PizzaBlock  {...obj} /> </Link> );
 
   // const pizzas = items.filter((obj)=>{
   //   if(obj.title.toLowerCase().includes(searchValue.toLowerCase())){

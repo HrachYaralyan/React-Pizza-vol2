@@ -3,9 +3,14 @@ import axios from 'axios';
 import { useParams , useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 
-const FullPiazza = () => {
+const FullPiazza : React.FC = () => {
   let { id } = useParams();
-  const [pizza, setpizza] = useState();
+  const [pizza, setpizza] = useState<{
+    imageUrl:string,
+    id:string,
+    title:string,
+    price:number
+  }>();
   const navigate =useNavigate();
 
   React.useEffect(() => {
@@ -22,7 +27,9 @@ const FullPiazza = () => {
     fetchPizza();
   }, []);
 
-  // console.log(pizza,"piizzzaa")
+  console.log(pizza,"piizzzaa")
+
+
 
 
   if(!pizza){
@@ -30,6 +37,10 @@ const FullPiazza = () => {
       <h1>Wait ...</h1>
     )
   }
+
+  
+
+
   return (
     <div>
 
@@ -39,6 +50,10 @@ const FullPiazza = () => {
       <p>
        {pizza.title}
       </p>
+      <p>
+       {pizza.price}
+      </p>
+    
     </div>
   );
 };

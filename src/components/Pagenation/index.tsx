@@ -2,7 +2,13 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import style from "./paginatoin.module.scss"
 
-function Pagenation({ currentPage, onCahnegePage}) {
+type IPagenation ={
+  currentPage:number;
+  onCahnegePage:(page:number)=>void;
+}
+
+const Pagenation:React.FC<IPagenation> = ({ currentPage, onCahnegePage})=>{
+// function Pagenation({ currentPage, onCahnegePage}) {
 
   // const handlePageClick = (event) => {
   //   const newOffset = (event.selected * itemsPerPage) % items.length;
@@ -23,7 +29,7 @@ function Pagenation({ currentPage, onCahnegePage}) {
         pageRangeDisplayed={4}
         pageCount={3}
         forcePage={currentPage - 1}
-        renderOnZeroPageCount={null}
+        // renderOnZeroPageCount={null}
       />
     </>
   )

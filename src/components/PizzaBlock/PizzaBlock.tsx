@@ -3,8 +3,18 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addItems, selectCartItemById} from "../../redux/slices/cartSlice";
 
 const typesName = ["тонкое","традиционное"];
+// string string number string object object
 
-function PizzaBlock({id, title ,price ,imageUrl ,sizes ,types}) {
+type IPizzaBlock = {
+   id:string;
+   title:string;
+   price:number;
+   imageUrl:string;
+   sizes:number[] ;
+   types:number[] ;
+}
+
+const PizzaBlock: React.FC<IPizzaBlock> = ({id, title ,price ,imageUrl ,sizes ,types})=>{
   const dispatch = useDispatch();
   // const cartItem = useSelector((state)=>state.cart.items.find((obj)=>obj.id === id));
   const cartItem = useSelector(selectCartItemById(id)); //look up 
@@ -13,6 +23,7 @@ function PizzaBlock({id, title ,price ,imageUrl ,sizes ,types}) {
   let [activeSize ,setActiveSize] = React.useState(0)
 
   const addedCount = cartItem ? cartItem.count : 0;
+  // console.log(typeof id,typeof title ,typeof price , typeof imageUrl , typeof sizes ,typeof types,88888888888888888);
 
   const onClikcAdd = () =>{
     const  item  = {

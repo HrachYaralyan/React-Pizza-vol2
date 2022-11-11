@@ -6,27 +6,28 @@ import {  useDispatch } from 'react-redux';
 
 import style from "./search.module.scss";
 
-export default function Search(){
+
+const Search:React.FC = ()=>{
   let dispatch = useDispatch();
   // let {setSearchValue} = React.useContext(SearchContext);
   const [value , setValue] = React.useState("");
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const onclickClear=()=>{
     setValue("");
     // setSearchValue("");
     dispatch(setSearchValue(""));
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }
 
   const updateSerachValue = React.useCallback(
-    debounce((str)=>{
+    debounce((str:string)=>{
       // setSearchValue(str)
       dispatch(setSearchValue(str))
     },300),[])//debounce - դա առանձին pacage -է որը նաման է setTimeOut-ին այսինքն հետաձգված function - ի կանչ է 
     // այստեղ մենք ունենք 2 state : 1 - ը visual տեքստը ցույցտալու համար է մյուսը իրական գործողության state -ին փոխանցելու համար 
 
-    const onChangeInput=(event)=>{
+    const onChangeInput=(event: React.ChangeEvent<HTMLInputElement>)=>{
       setValue(event.target.value);
       updateSerachValue(event.target.value)
     }
@@ -43,3 +44,6 @@ export default function Search(){
    
   )
 }
+
+
+export default Search;

@@ -2,7 +2,17 @@ import React from "react";
 import {useSelector , useDispatch} from  "react-redux";
 import {selectSort, setSortType} from "../redux/slices/filterSlice";
 
-export const list = [{name : "популярности (DESC)", sortProperty : "rating"},
+
+type ListItem = {
+  name : string ;
+  sortProperty : string;
+};
+type PopupClick = MouseEvent & {
+  path: Node[];
+};
+
+
+export const list :ListItem[] = [{name : "популярности (DESC)", sortProperty : "rating"},
               {name : "популярности (ASC -)" , sortProperty : "-rating"},
               {name : "цене (DESC) 10..1" , sortProperty : "price"},
               {name : "цене (ASC) 1..10" , sortProperty : "-price"},
@@ -20,18 +30,22 @@ function Sort() {
 
 
 let [open , setOpen] = React.useState(false);
-let sortRef = React.useRef();
+let sortRef = React.useRef<HTMLDivElement>(null);
  
 
-  function onClickSortItem(obj) {
+  function onClickSortItem(obj :ListItem) {
     dispatch(setSortType(obj))
     setOpen(false)
   }
 
 React.useEffect(()=>{
-  const handleClikcoutSide = (e)=>{
-      if(!e.path.includes(sortRef.current)){
-        setOpen(false)
+  const handleClikcoutSide = (event: MouseEvent)=>{
+    const _event = event as PopupClick;
+      // if(!e.path.includes(sortRef.current)){
+      //   setOpen(false)
+      // }
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
+        setOpen(false);
       }
   }
   document.body.addEventListener("click", handleClikcoutSide);
